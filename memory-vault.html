@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📜 Memory Vault</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+}
+
+button{
+padding:12px 20px;
+background:#38bdf8;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0ea5e9;
+}
+
+.memory{
+background:rgba(255,255,255,0.1);
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+}
+
+a{
+display:inline-block;
+margin-top:20px;
+color:white;
+text-decoration:none;
+background:#22c55e;
+padding:10px 20px;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>📜 Memory Vault</h1>
+
+<input type="text" id="title" placeholder="Memory Title">
+
+<textarea id="memory" rows="6"
+placeholder="Write your memory here..."></textarea>
+
+<button onclick="saveMemory()">Save Memory</button>
+
+<div id="output"></div>
+
+<a href="index.html">🏠 Back Home</a>
+
+</div>
+
+<script>
+
+function saveMemory(){
+
+let title=
+document.getElementById("title").value;
+
+let memory=
+document.getElementById("memory").value;
+
+localStorage.setItem(title,memory);
+
+document.getElementById("output").innerHTML=
+`
+<div class="memory">
+<h3>${title}</h3>
+<p>${memory}</p>
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
