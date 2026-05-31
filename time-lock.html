@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⏳ Time Lock</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+}
+
+h1{
+color:#38bdf8;
+}
+
+input{
+padding:12px;
+font-size:16px;
+border:none;
+border-radius:10px;
+margin:10px;
+}
+
+button{
+padding:12px 20px;
+background:#38bdf8;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0ea5e9;
+}
+
+.timer{
+margin-top:30px;
+padding:25px;
+background:rgba(255,255,255,0.08);
+border-radius:15px;
+}
+
+a{
+display:inline-block;
+margin-top:25px;
+padding:10px 20px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+border-radius:10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>⏳ Time Lock Capsule</h1>
+
+<p>Select a future date to lock your capsule.</p>
+
+<input type="date" id="lockDate">
+
+<button onclick="startCountdown()">
+🔒 Lock Capsule
+</button>
+
+<div class="timer">
+
+<h2>Countdown</h2>
+
+<h3 id="countdown">
+No capsule locked yet.
+</h3>
+
+</div>
+
+<a href="index.html">🏠 Back Home</a>
+
+</div>
+
+<script>
+
+let interval;
+
+function startCountdown(){
+
+clearInterval(interval);
+
+const selectedDate =
+new Date(
+document.getElementById("lockDate").value
+).getTime();
+
+if(!selectedDate){
+
+alert("Please choose a date.");
+return;
+
+}
+
+interval = setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance =
+selectedDate - now;
+
+if(distance <= 0){
+
+document.getElementById(
+"countdown"
+).innerHTML =
+"🎉 Capsule Unlocked!";
+
+clearInterval(interval);
+
+return;
+
+}
+
+const days =
+Math.floor(
+distance/(1000*60*60*24)
+);
+
+const hours =
+Math.floor(
+(distance%(1000*60*60*24))
+/
+(1000*60*60)
+);
+
+const minutes =
+Math.floor(
+(distance%(1000*60*60))
+/
+(1000*60)
+);
+
+const seconds =
+Math.floor(
+(distance%(1000*60))
+/
+1000
+);
+
+document.getElementById(
+"countdown"
+).innerHTML =
+days + " Days " +
+hours + " Hours " +
+minutes + " Minutes " +
+seconds + " Seconds";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
